@@ -306,8 +306,7 @@ def generate_summary(doc=None, rank_lower_bound=4):
         summarized_text.append(" ".join(ranked_sentences[i][1]))
 
     # 4) Return summary
-
-    return " ".join(ranked_sentences[i][1])
+    return " ".join(summarized_text)
 
 
 sentences = load(
