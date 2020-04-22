@@ -1,0 +1,1 @@
+Purpose of this repo is to rapid-prototype extractive/abstractive text summarization methods. Methods used for extractive summarization is cosine similarity and [ranking](https://arxiv.org/abs/1703.09902v1). Plans for next features includes wrapping in protobuf/grpc system for much faster api calls, using pre-trained word2vec systems, and caching.
