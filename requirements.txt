@@ -5,3 +5,4 @@ requests
 nltk
 bs4
 networkx
+lxml

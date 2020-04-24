@@ -284,7 +284,7 @@ def sentence_similarity(sentence_a, sentence_b, stopwords):
 # TODO: add damping parameter to graph generation
 
 
-def generate_summary(doc=None, rank_lower_bound=4):
+def summarize(doc=None, rank_lower_bound=4):
     if doc is None:
         return 'Error: please provide valid input doc'
 
