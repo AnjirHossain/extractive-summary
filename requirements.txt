@@ -1,0 +1,7 @@
+flask
+flask_restful
+numpy
+requests
+nltk
+bs4
+networkx

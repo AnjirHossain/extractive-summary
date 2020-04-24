@@ -3,7 +3,7 @@ import networkx as nx
 import requests
 from nltk.cluster.util import cosine_distance
 from bs4 import BeautifulSoup
-from timeit import timeit
+from time import process_time
 
 # Load html from given url
 stopwords = [
@@ -306,11 +306,4 @@ def generate_summary(doc=None, rank_lower_bound=4):
         summarized_text.append(" ".join(ranked_sentences[i][1]))
 
     # 4) Return summary
-    return " ".join(summarized_text)
-
-
-sentences = load(
-    'https://www.theatlantic.com/health/archive/2020/03/how-will-coronavirus-end/608719/'
-)
-
-print(generate_summary(sentences, 20))
+    return ". ".join(summarized_text)
