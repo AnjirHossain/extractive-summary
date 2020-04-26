@@ -9,7 +9,7 @@ CORS(app)
 # health check route
 @app.route('/', methods=['GET'])
 def health():
-    return jsonify({'version': 'API v1'}), 200
+    return {'version': 'API v1'}, 200
 
 
 @app.route('/api/v1/getsummary', methods=['POST'])
@@ -21,7 +21,7 @@ def get_summary():
             or len(data['text']) == 0:
         return jsonify({'error': 'No data provided'})
 
-    return jsonify({'text': summarize(doc=data['text'], rank_lower_bound=3)})
+    return {'text': summarize(doc=data['text'], rank_lower_bound=3)}, 200
 
 
 if __name__ == '__main__':
