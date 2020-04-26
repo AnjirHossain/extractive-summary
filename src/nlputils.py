@@ -292,15 +292,21 @@ def summarize(doc=None, rank_lower_bound=4):
     sentences = tokenize_parsed_html(doc)
 
     # 1) Build similarity matrix
+    t1 = process_time()
     similarity_matrix = build_similarity_matrix(sentences, stopwords)
+    t2 = process_time()
 
     # 2) Rank sentences in similarity matrix
+    t3 = process_time()
     similarity_graph = nx.from_numpy_array(similarity_matrix)
     scores = nx.pagerank(similarity_graph)
+    t4 = process_time()
 
     # 3) Sort scores and pick top sentences
+    t5 = process_time()
     ranked_sentences = sorted(
         ((scores[i], s) for i, s in enumerate(sentences)), reverse=True)
+    t6 = process_time()
 
     for i in range(rank_lower_bound):
         summarized_text.append(" ".join(ranked_sentences[i][1]))

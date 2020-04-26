@@ -1,8 +1,15 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 from flask_restful import Resource, Api
 from src.nlputils import summarize
 
 app = Flask(__name__)
+CORS(app)
+
+# health check route
+@app.route('/', methods=['GET'])
+def health():
+    return jsonify({'version': 'API v1'}), 200
 
 
 @app.route('/api/v1/getsummary', methods=['POST'])

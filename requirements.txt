@@ -6,3 +6,4 @@ nltk
 bs4
 networkx
 lxml
+flask-cors
