@@ -10,3 +10,10 @@ Intructions to run:
 
 1) `docker-compose build`
 2) `docker-compose up`
+3) App running on port http://0.0.0.0:80/
+4) Post to http://0.0.0.0:80/api/v1/getsummary using: 
+  `
+    {
+      "text": "Text you wish to summarize"
+    }
+  `
