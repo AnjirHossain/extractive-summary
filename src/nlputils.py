@@ -175,13 +175,13 @@ def load(url=None):
     try:
         return requests.get(url).text
     except requests.exceptions.RequestException as err:
-        raise SystemExit("RequestException:load: ", err)
+        return None
     except requests.exceptions.HTTPError as errh:
-        raise SystemExit("Http Error:load: ", errh)
+        return None
     except requests.exceptions.ConnectionError as errc:
-        raise SystemExit("Error Connecting:load: ", errc)
+        return None
     except requests.exceptions.Timeout as errt:
-        raise SystemExit("Timeout Error:load: ", errt)
+        return None
 
 
 # Parse and get all text from paragraphs in html
@@ -204,10 +204,7 @@ def parse_html(origin_doc=None):
 
 
 def get_text_from_page(url=None):
-    return 'No url provided' if url is None else parse_html(load(url))
-
-
-#
+    return parse_html(load(url))
 
 
 def tokenize_parsed_html(origin_doc=None):
@@ -308,7 +305,14 @@ def summarize(doc=None, rank_lower_bound=4):
         ((scores[i], s) for i, s in enumerate(sentences)), reverse=True)
     t6 = process_time()
 
-    for i in range(rank_lower_bound):
+    bound_range = None
+
+    if len(range(rank_lower_bound)) > len(ranked_sentences):
+        bound_range = range(len(ranked_sentences))
+    else:
+        bound_range = range(rank_lower_bound)
+
+    for i in bound_range:
         summarized_text.append(" ".join(ranked_sentences[i][1]))
 
     # 4) Return summary
