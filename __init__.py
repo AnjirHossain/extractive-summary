@@ -28,7 +28,7 @@ def get_summary():
     if not no_text and len(data['text']) == 0:
         return {'message': 'Malformed request, the source text is empty'}, 400
 
-    if not no_url in data and len(data['url']) == 0:
+    if not no_url and len(data['url']) == 0:
         return {'message': 'Malformed request, the url of the source text is empty'}, 400
 
     if no_text:
