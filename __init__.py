@@ -1,3 +1,9 @@
+'''
+    TODO:
+    - get either url or text from request
+    - run extractive summary util
+    - use stategy pattern instead of if / else
+'''
 import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
