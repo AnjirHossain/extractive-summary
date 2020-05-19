@@ -1,7 +1,9 @@
+import requests
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 from flask_restful import Resource, Api
 from src.nlputils import summarize, load, get_text_from_page
+
 
 app = Flask(__name__)
 CORS(app)
@@ -16,32 +18,28 @@ def health():
 def get_summary():
     data = request.get_json()
 
-    summary = None
-    no_text = 'text' not in data
-    no_url = 'url' not in data
+    error = {
+        'malformed_req': ({'message': 'Malformed request, must provide either a body of unempty text or valid article url to retrieve text'}, 400),
+        'unresolved_source_doc': ({'message': 'Malformed request, the url provided couldn\'t be resolved'}, 400)
+    }
 
-    if data is None \
-            or no_text \
-            and no_url:
-        return {'message': 'Malformed request, must provide either text or url to retrieve text'}, 400
+    text = data.get('text')
+    url = data.get('url')
 
-    if not no_text and len(data['text']) == 0:
-        return {'message': 'Malformed request, the source text is empty'}, 400
+    if text and len(text) == 0:
+        text = None
+    if url and len(url) == 0:
+        url = None
 
-    if not no_url and len(data['url']) == 0:
-        return {'message': 'Malformed request, the url of the source text is empty'}, 400
+    if not (text or url):
+        return error['malformed_req']
 
-    if no_text:
-        source_doc = get_text_from_page(data['url'])
+    source_doc = text if text is not None else get_text_from_page(url)
 
-        if source_doc is None:
-            return {'message': 'Malformed request, the url provided couldn\'t be resolved'}, 400
-
-        summary = summarize(source_doc)
+    if source_doc is None:
+        return error['unresolved_source_doc']
     else:
-        summary = summarize(data['text'])
-
-    return {'summary': summary}, 200
+        return {'summary': summarize(source_doc)}, 200
 
 
 if __name__ == '__main__':
