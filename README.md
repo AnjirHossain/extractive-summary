@@ -21,3 +21,7 @@ This repo explores rapid-prototyping [extractive](https://ieeexplore.ieee.org/ab
    `{ "text": "Text you wish to summarize" }`
    or
    `{ "url": "Url of any article" }`
+
+### Changenotes
+
+- updated reqs
