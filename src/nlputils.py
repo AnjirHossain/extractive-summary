@@ -1,9 +1,10 @@
-import numpy as np
-import networkx as nx
-import requests
-from nltk.cluster.util import cosine_distance
-from bs4 import BeautifulSoup
 from time import process_time
+
+import networkx as nx
+import numpy as np
+import requests
+from bs4 import BeautifulSoup
+from nltk.cluster.util import cosine_distance
 
 # Load html from given url
 stopwords = [
