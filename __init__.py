@@ -5,16 +5,18 @@
     - use stategy pattern instead of if / else
 '''
 import requests
-from flask import Flask, request, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
-from flask_restful import Resource, Api
-from src.nlputils import summarize, load, get_text_from_page
+from flask_restful import Api, Resource
 
+from src.nlputils import get_text_from_page, load, summarize
 
 app = Flask(__name__)
 CORS(app)
 
 # health check route
+
+
 @app.route('/', methods=['GET'])
 def health():
     return {'version': 'API v1'}, 200

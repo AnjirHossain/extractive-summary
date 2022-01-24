@@ -201,8 +201,6 @@ def parse_html(origin_doc=None):
 
     return result
 
-# Get cleaned text from url
-
 
 def get_text_from_page(url=None):
     return parse_html(load(url))
@@ -256,8 +254,6 @@ def build_similarity_matrix(sentences, stopwords):
 
     return summary_matrix
 
-# TODO: unit test
-
 
 def sentence_similarity(sentence_a, sentence_b, stopwords):
     a_tokenized = [w.lower() for w in sentence_a]
@@ -278,8 +274,6 @@ def sentence_similarity(sentence_a, sentence_b, stopwords):
             vector_b[all_words.index(w)] += 1
 
     return 1 - cosine_distance(vector_a, vector_b)
-
-# TODO: add damping parameter to graph generation
 
 
 def summarize(doc=None, rank_lower_bound=4):
